@@ -4,26 +4,26 @@
     <Send xmlns="http://www.cellact.com/webservices/">
       <credentials>
         <username>iplan</username>
-        <password>AqR89135Z</password>
+        <password>*****</password>
         <company>iplan</company>
       </credentials>
       <sendRequest>
         <application>LA</application>
         <command>sendtextmt</command>
-        <sender>iPlan</sender>
         <content>asdf</content>
+        <destinationAddresses>
+          <DestinationAddress>
+            <address>+972545290862</address>
+          </DestinationAddress>
+        </destinationAddresses>
         <deliveryAddresses>
           <DeliveryReportAddress>
             <type>http</type>
             <address>http://testprod.smsagg.iplan.co.il/api/gateway/push_delivery_notification</address>
           </DeliveryReportAddress>
         </deliveryAddresses>
-        <destinationAddresses>
-          <DestinationAddress>
-            <address>+972545290862</address>
-          </DestinationAddress>
-        </destinationAddresses>
-		<messageId>lalala1234</messageId>
+        <sender>iPlan</sender>
+		    <messageId>lalala1234</messageId>
       </sendRequest>
     </Send>
   </soap:Body>
