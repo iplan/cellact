@@ -1,3 +1,11 @@
+# rubymine
+.idea/
+.idea/**/*
+
+# log files
+*.log
+
+#---------------------------------------------------------
 # rcov generated
 coverage
 coverage.data

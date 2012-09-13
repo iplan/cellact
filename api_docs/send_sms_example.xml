@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Send xmlns="http://www.cellact.com/webservices/">
+      <credentials>
+        <username>iplan</username>
+        <password>AqR89135Z</password>
+        <company>iplan</company>
+      </credentials>
+      <sendRequest>
+        <application>LA</application>
+        <command>sendtextmt</command>
+        <sender>iPlan</sender>
+        <content>asdf</content>
+        <deliveryAddresses>
+          <DeliveryReportAddress>
+            <type>http</type>
+            <address>http://testprod.smsagg.iplan.co.il/api/gateway/push_delivery_notification</address>
+          </DeliveryReportAddress>
+        </deliveryAddresses>
+        <destinationAddresses>
+          <DestinationAddress>
+            <address>+972545290862</address>
+          </DestinationAddress>
+        </destinationAddresses>
+		<messageId>lalala1234</messageId>
+      </sendRequest>
+    </Send>
+  </soap:Body>
+</soap:Envelope>
