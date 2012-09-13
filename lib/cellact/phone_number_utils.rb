@@ -1,4 +1,4 @@
-module Smsim
+module Cellact
 
   class PhoneNumberUtils
     @@valid_lengths = {
