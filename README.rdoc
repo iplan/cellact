@@ -1,4 +1,4 @@
-= smsim
+= Cellact
 
 Ruby api for sms service provider: Cellact
 
