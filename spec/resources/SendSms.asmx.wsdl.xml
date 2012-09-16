@@ -1,0 +1,164 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.cellact.com/webservices/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://www.cellact.com/webservices/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cellact.com/webservices/">
+      <s:element name="SendText">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+            <s:element minOccurs="0" maxOccurs="1" name="content" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="destinationAddressSet" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Credentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="company" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTextResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendTextResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Result">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="result" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="sessionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="errorDescription" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Send">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="credentials" type="tns:Credentials" />
+            <s:element minOccurs="0" maxOccurs="1" name="sendRequest" type="tns:SendRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SendRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="transactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="application" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="command" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="timeToSend" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="timeToLive" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="deliveryAddresses" type="tns:ArrayOfDeliveryReportAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="sender" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="content" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="link" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="destinationAddresses" type="tns:ArrayOfDestinationAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="links" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="messageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="serviceCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDeliveryReportAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DeliveryReportAddress" nillable="true" type="tns:DeliveryReportAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DeliveryReportAddress">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:DeliveryReportAddressType" />
+          <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DeliveryReportAddressType">
+        <s:restriction base="s:string">
+          <s:enumeration value="none" />
+          <s:enumeration value="email" />
+          <s:enumeration value="http" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfDestinationAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DestinationAddress" nillable="true" type="tns:DestinationAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DestinationAddress">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="type" type="tns:DestinationAddressType" />
+          <s:element minOccurs="0" maxOccurs="1" name="cellularOperator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="address" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DestinationAddressType">
+        <s:restriction base="s:string">
+          <s:enumeration value="none" />
+          <s:enumeration value="ouch" />
+          <s:enumeration value="gsm" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SendTextSoapIn">
+    <wsdl:part name="parameters" element="tns:SendText" />
+  </wsdl:message>
+  <wsdl:message name="SendTextSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTextResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendSoapIn">
+    <wsdl:part name="parameters" element="tns:Send" />
+  </wsdl:message>
+  <wsdl:message name="SendSoapOut">
+    <wsdl:part name="parameters" element="tns:SendResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SendSmsSoap">
+    <wsdl:operation name="SendText">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Send simple text message to specified destination address set</documentation>
+      <wsdl:input message="tns:SendTextSoapIn" />
+      <wsdl:output message="tns:SendTextSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Send">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Send Cellact Sms Structure</documentation>
+      <wsdl:input message="tns:SendSoapIn" />
+      <wsdl:output message="tns:SendSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SendSmsSoap" type="tns:SendSmsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="SendText">
+      <soap:operation soapAction="http://www.cellact.com/webservices/SendText" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Send">
+      <soap:operation soapAction="http://www.cellact.com/webservices/Send" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SendSms">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Cellact SMS Gateway</documentation>
+    <wsdl:port name="SendSmsSoap" binding="tns:SendSmsSoap">
+      <soap:address location="http://la1.cellactpro.com/SendSms.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

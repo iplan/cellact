@@ -31,10 +31,9 @@ module Cellact
       valid_phone_length?(phone, @@valid_lengths[:land_line].first) || valid_phone_length?(phone, @@valid_lengths[:land_line].last)
     end
 
-    # for two way sms - valid sender number is cellular phone
-    # for one way sms - sender number must include at least 4 digits
-    def self.valid_sender_number?(phone, two_way)
-      two_way ? valid_cellular_phone?(phone) : phone.to_s =~ /^[0-9]{4}$/
+    # valid sender number is valid cellular phone or landline phone
+    def self.valid_sender_number?(phone)
+      valid_cellular_phone?(phone) || valid_land_line_phone?(phone)
     end
 
     # make sure phone is in given length and starts with country code
@@ -47,6 +46,11 @@ module Cellact
     # if phone contains digits and letters it will leave it untouched
     def self.phone_number_to_id_string(phone)
       phone = phone.to_i.to_s(36) if phone =~ /^[0-9]+$/
+      phone
+    end
+
+    def self.without_starting_plus(phone)
+      phone = phone[1, phone.length] if phone.start_with?('+')
       phone
     end
   end

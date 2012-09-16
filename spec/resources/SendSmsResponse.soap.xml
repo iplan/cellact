@@ -1,0 +1,7 @@
+<SendResponse xmlns="http://www.cellact.com/webservices/">
+  <SendResult>
+    <result>false</result>
+    <sessionId>23333</sessionId>
+    <errorDescription>Address not allowed</errorDescription>
+  </SendResult>
+</SendResponse>

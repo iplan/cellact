@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IncomingData>
+  <PhoneNumber>0501111111</PhoneNumber>
+  <Keyword>key</Keyword>
+  <Message>Hello World</Message>
+  <Network>052</Network>
+  <ShortCode>0529992080</ShortCode>
+  <CustomerID>12</CustomerID>
+  <ProjectID>123</ProjectID>
+  <ApplicationID>12321</ApplicationID>
+</IncomingData>
