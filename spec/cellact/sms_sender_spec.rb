@@ -35,7 +35,7 @@ describe Cellact::SmsSender do
 
     it 'should raise error when send failed' do
       XmlResponseStubs.stub_request_with_sms_send_response(self, sender.wsdl_url, :result => false)
-      lambda{ sender.send_sms('message', phone, :sender_number => '972541234567') }.should raise_error(Cellact::Errors::GatewayError)
+      lambda{ sender.send_sms('message', phone, :sender_number => '972541234567') }.should raise_error(Cellact::GatewayError)
     end
 
     it 'should return message_id when send succeeds' do

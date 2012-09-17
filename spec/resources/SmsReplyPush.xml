@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<IncomingData>
-  <PhoneNumber>0501111111</PhoneNumber>
-  <Keyword>key</Keyword>
-  <Message>Hello World</Message>
-  <Network>052</Network>
-  <ShortCode>0529992080</ShortCode>
-  <CustomerID>12</CustomerID>
-  <ProjectID>123</ProjectID>
-  <ApplicationID>12321</ApplicationID>
-</IncomingData>
+<PALO>
+  <HEAD>
+    <BLMJ>588971c4-ab8f-4940-ba4d-e2745b6d2aea</BLMJ>
+    <CMD>היי</CMD>
+    <COMPANY>iplan</COMPANY>
+  </HEAD>
+  <BODY>
+    <SENDER OP="97254" NET="GSM" DEVICE_MODEL="">+972545290862</SENDER>
+    <CONTENT>היי לך</CONTENT>
+    <DEST_LIST>
+      <TO>+972529999299</TO>
+    </DEST_LIST>
+  </BODY>
+  <OTHER>
+    <EVT>mo</EVT>
+    <DATE>20120916125254</DATE>
+    <CP_MO>cellcom</CP_MO>
+  </OTHER>
+</PALO>

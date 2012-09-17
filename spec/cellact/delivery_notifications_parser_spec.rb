@@ -9,7 +9,7 @@ describe Cellact::DeliveryNotificationsParser do
     let(:notification) { parser.http_push({'CONFIRMATION' => XmlResponseStubs.delivery_notification_http_xml_string(notification_values)}) }
 
     it 'should raise error if parameters are missing or not of expected type' do
-      lambda { parser.http_push({'Puki' => 'asdf'}) }.should raise_error(Cellact::Errors::GatewayError)
+      lambda { parser.http_push({'Puki' => 'asdf'}) }.should raise_error(Cellact::GatewayError)
     end
 
     it 'should return delivery notification with all fields initialized' do

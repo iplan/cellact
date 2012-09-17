@@ -38,7 +38,7 @@ class XmlResponseStubs
 
     def sms_reply_http_xml_string(values_hash = {})
       doc = ::Nokogiri::XML(FileMacros.load_xml_file('SmsReplyPush.xml'))
-      root = doc.at_css('IncomingData')
+      root = doc.at_css('PALO')
       values_hash.each do |key, value|
         root.at_css(key.to_s).content = value
       end

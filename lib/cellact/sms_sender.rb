@@ -57,7 +57,7 @@ module Cellact
       response.sender_number = PhoneNumberUtils.without_starting_plus(options[:sender_number])
       logger.debug "#send_sms - parsed response: #{response.inspect}"
       unless response.ok
-        raise Cellact::Errors::GatewayError.new(111, "Sms send failed, reason: #{response.error_description}", :soap_xml => soap_xml, :parsed_response => response)
+        raise Cellact::GatewayError.new(111, "Sms send failed, reason: #{response.error_description}", :soap_xml => soap_xml, :parsed_response => response)
       end
       response
     end
@@ -159,7 +159,7 @@ module Cellact
         end
         OpenStruct.new(result)
       rescue Exception => e
-        raise Cellact::Errors::GatewayError.new(250, e.message)
+        raise Cellact::GatewayError.new(250, e.message)
       end
     end
 

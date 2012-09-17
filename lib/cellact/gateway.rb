@@ -7,7 +7,7 @@ module Cellact
   class Gateway
     attr_reader :username, :password, :company, :cellact_urls, :time_zone, :logger
 
-    attr_reader :sms_sender, :delivery_notification_parser
+    attr_reader :sms_sender, :delivery_notification_parser, :sms_replies_parser
 
     # Create new gateway with given +username+ and +password+
     # +config+ hash with the following keys:
@@ -30,6 +30,7 @@ module Cellact
 
       @sms_sender = SmsSender.new(self)
       @delivery_notification_parser = DeliveryNotificationsParser.new(self)
+      @sms_replies_parser = SmsRepliesParser.new(self)
     end
 
     # send +text+ string to the +phones+ array of phone numbers
@@ -49,7 +50,7 @@ module Cellact
     end
 
     def on_sms_reply_http_push(params)
-      Cellact::SmsRepliesParser.http_push(params)
+      @sms_replies_parser.http_push(params)
     end
 
   end
