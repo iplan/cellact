@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Alex Tkachev"]
-  s.date = "2012-09-13"
+  s.date = "2012-09-17"
   s.description = "Ruby api for sms service provider: Cellact"
   s.email = "tkachev.alex@gmail.com"
   s.extra_rdoc_files = [
@@ -24,9 +24,29 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "cellact.gemspec",
     "lib/cellact.rb",
-    "test/helper.rb",
-    "test/test_cellact.rb"
+    "lib/cellact/delivery_notifications_parser.rb",
+    "lib/cellact/gateway.rb",
+    "lib/cellact/gateway_error.rb",
+    "lib/cellact/phone_number_utils.rb",
+    "lib/cellact/sms_replies_parser.rb",
+    "lib/cellact/sms_sender.rb",
+    "spec/cellact/delivery_notifications_parser_spec.rb",
+    "spec/cellact/gateway_spec.rb",
+    "spec/cellact/phone_number_utils_spec.rb",
+    "spec/cellact/sms_replies_parser_spec.rb",
+    "spec/cellact/sms_sender_spec.rb",
+    "spec/cellact_spec.rb",
+    "spec/resources/DeliveryNotificationPush.xml",
+    "spec/resources/EnvelopeResponse.soap.xml",
+    "spec/resources/SendSms.asmx.wsdl.xml",
+    "spec/resources/SendSmsResponse.soap.xml",
+    "spec/resources/SmsReplyPush.xml",
+    "spec/resources/SmsSendResponse.xml",
+    "spec/spec_helper.rb",
+    "spec/support/file_macros.rb",
+    "spec/support/xml_response_stubs.rb"
   ]
   s.homepage = "http://github.com/alextk/cellact"
   s.licenses = ["MIT"]
