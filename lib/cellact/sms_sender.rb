@@ -54,7 +54,7 @@ module Cellact
 
       response = parse_response_xml(soap_xml)
       response.sender_name = options[:sender_name]
-      response.sender_number = PhoneNumberUtils.without_starting_plus(options[:sender_number])
+      response.sender_number = PhoneNumberUtils.without_starting_plus(options[:sender_number]) if options[:sender_number].present?
       logger.debug "#send_sms - parsed response: #{response.inspect}"
       unless response.ok
         raise Cellact::GatewayError.new(111, "Sms send failed, reason: #{response.error_description}", :soap_xml => soap_xml, :parsed_response => response)
