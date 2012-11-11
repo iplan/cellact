@@ -67,7 +67,7 @@ module Cellact
     def parse_reply_values_hash(values)
       logger.debug "Parsing reply_values_hash: #{values.inspect}"
       Time.zone = @gateway.time_zone
-      [:phone, :text, :reply_to_phone, :message_id].each do |key|
+      [:phone, :reply_to_phone, :message_id].each do |key| #NOTE!!! we allow text to be blank, as it can be blank (it should be handled in the app layer)
         raise Cellact::GatewayError.new(601, "Missing sms reply values key #{key}. Values were: #{values.inspect}", :values => values) if values[key].blank?
       end
 
