@@ -31,9 +31,14 @@ module Cellact
       valid_phone_length?(phone, @@valid_lengths[:land_line].first) || valid_phone_length?(phone, @@valid_lengths[:land_line].last)
     end
 
-    # valid sender number is valid cellular phone or landline phone
-    def self.valid_sender_number?(phone)
-      valid_cellular_phone?(phone) || valid_land_line_phone?(phone)
+    # valid sender number is between 4 and 14 digits
+    def self.valid_sender_number?(sender_number)
+      sender_number =~ /^[0-9]{4,14}$/i
+    end
+
+    # valid sender name is between 2 and 11 latin chars or digits
+    def self.valid_sender_name?(sender_name)
+      sender_name =~ /^[a-z0-9]{2,11}$/i
     end
 
     # make sure phone is in given length and starts with country code
