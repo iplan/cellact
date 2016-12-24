@@ -24,8 +24,6 @@ module Cellact
       raise ArgumentError.new("Reply to number must be between 4 to 14 digits: #{options[:sender_number]}") if options[:sender_number].present? && !PhoneNumberUtils.valid_sender_number?(options[:sender_number])
       raise ArgumentError.new("Sender name must be between 2 and 11 latin chars") if options[:sender_name].present? && !PhoneNumberUtils.valid_sender_name?(options[:sender_name])
 
-      options[:sender_number] = "+#{options[:sender_number]}" if options[:sender_number].present?
-
       phones = [phones] unless phones.is_a?(Array)
       # check that phones are in valid cellular format
       for p in phones
@@ -35,10 +33,6 @@ module Cellact
       service = ::Savon::Client.new(wsdl_url)
       logger.debug "#send_sms via webservice: #{wsdl_url}."
       response = service.request(:send) do
-        #soap.body = build_soap_body_hash(message_text, phones, options)
-        #soap.body do |xml|
-        #  build_soap_body_xml(xml, message_text, phones, options)
-        #end
         soap.xml do |xml|
           build_soap_xml(xml, message_text, phones, options)
         end
@@ -77,35 +71,6 @@ module Cellact
       soap_body
     end
 
-    def build_soap_body_xml(xml, message_text, phones, options = {})
-      xml.credentials do |xml|
-        xml.username(@gateway.username)
-        xml.password(@gateway.password)
-        xml.company(@gateway.company)
-      end
-      xml.sendRequest do |xml|
-        xml.application('LA')
-        xml.command('sendtextmt')
-        if options[:delivery_notification_url].present?
-          xml.deliveryAddresses do |xml|
-            xml.DeliveryReportAddress do |xml|
-              xml.type('http')
-              xml.address(options[:delivery_notification_url])
-            end
-          end
-        end
-        xml.sender(options[:sender_name] || options[:sender_number])
-        xml.content(message_text)
-        xml.destinationAddresses do |xml|
-          phones.each do |p|
-            xml.DestinationAddress do |xml|
-              xml.address("+#{p}")
-            end
-          end
-        end
-      end
-    end
-
     def build_soap_xml(xml, message_text, phones, options = {})
       namespaces = {
         #'xmlns:wsdl' => "http://www.cellact.com/webservices/",
@@ -133,7 +98,9 @@ module Cellact
                   end
                 end
               end
-              xml.sender(options[:sender_name] || options[:sender_number])
+              sender = options[:sender_number]
+              sender = options[:sender_name] if options[:sender_name].present?
+              xml.sender(sender)
               xml.content(message_text)
               xml.destinationAddresses do |xml|
                 phones.each do |p|

@@ -1,9 +1,9 @@
 source "http://rubygems.org"
 
-gem 'httparty', '~> 0.9'
+gem 'httparty', '~> 0.10.2'
 gem 'builder', '~> 2.1'
 gem 'savon', '~> 1.1'
-gem 'nokogiri', '~> 1.5'
+gem 'nokogiri', '~> 1.5.10'
 gem 'uuidtools', '~> 2.1'
 gem 'logging', '~> 1.7'
 gem 'activesupport', '~> 3.0.9'
@@ -17,6 +17,6 @@ group :development do
   gem "webmock"
   gem "rdoc", "~> 3.12"
   gem "bundler"
-  gem "jeweler", "~> 1.8.4"
+  gem "jeweler", "~> 1.8.8"
   gem "rcov", ">= 0"
 end
