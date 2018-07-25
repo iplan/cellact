@@ -22,13 +22,13 @@ describe Cellact::SmsSender do
       lambda{ sender.send_sms(message, '541234567') }.should raise_error(ArgumentError)
     end
 
-    it 'should raise error if sender_number is present and not valid cellular phone' do
-      lambda{ sender.send_sms(message, phone, :sender_number => '0541234567') }.should raise_error(ArgumentError)
-      lambda{ sender.send_sms(message, phone, :sender_number => '541234567') }.should raise_error(ArgumentError)
+    it 'should raise error if sender_number is present and not valid' do
+      lambda{ sender.send_sms(message, phone, :sender_number => '054') }.should raise_error(ArgumentError)
+      lambda{ sender.send_sms(message, phone, :sender_number => '123456789111315') }.should raise_error(ArgumentError)
+      lambda{ sender.send_sms(message, phone, :sender_number => 'aaaa') }.should raise_error(ArgumentError)
     end
 
-    it 'should raise error if sender_name is present and not latin characters' do
-      lambda{ sender.send_sms(message, phone, :sender_name => '0541234567') }.should raise_error(ArgumentError)
+    it 'should raise error if sender_name is present and not latin characters or numbers' do
       lambda{ sender.send_sms(message, phone, :sender_name => '*7') }.should raise_error(ArgumentError)
       lambda{ sender.send_sms(message, phone, :sender_name => 'יוסי') }.should raise_error(ArgumentError)
     end
@@ -92,8 +92,8 @@ describe Cellact::SmsSender do
 
     it 'should have delivery notification url if specified' do
       opts[:delivery_notification_url] = 'http://google.com?auth=1234&alex=king'
-      soap_body_hash['deliveryAddresses']['DeliveryReportAddress']['type'].should == 'http'
-      soap_body_hash['deliveryAddresses']['DeliveryReportAddress']['address'].should == 'http://google.com?auth=1234&alex=king'
+      soap_body_hash['sendRequest']['deliveryAddresses']['DeliveryReportAddress']['type'].should == 'http'
+      soap_body_hash['sendRequest']['deliveryAddresses']['DeliveryReportAddress']['address'].should == 'http://google.com?auth=1234&alex=king'
     end
 
     it 'should not have delivery notification url if not specified' do
@@ -105,14 +105,14 @@ describe Cellact::SmsSender do
     it 'should return error description when send fails' do
       xml = XmlResponseStubs.send_sms_response(:result => false, :errorDescription => 'not good')
       result = sender.parse_response_xml(xml)
-      result.ok.should be_false
+      result.ok.should be_falsey
       result.error_description.should == 'not good'
     end
 
     it 'should return message_id when send succeeds' do
       xml = XmlResponseStubs.send_sms_response(:result => true, :sessionId => 3333)
       result = sender.parse_response_xml(xml)
-      result.ok.should be_true
+      result.ok.should be_truthy
       result.message_id.should == '3333'
     end
   end
