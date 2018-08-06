@@ -21,7 +21,8 @@ module Cellact
       raise ArgumentError.new("Text must be at least 1 character long") if message_text.blank?
       raise ArgumentError.new("No phones were given") if phones.blank?
       raise ArgumentError.new("Either :sender_name or :sender_number attribute required") if options[:sender_name].blank? && options[:sender_number].blank?
-      raise ArgumentError.new("Reply to number must be between 4 to 14 digits: #{options[:sender_number]}") if options[:sender_number].present? && !PhoneNumberUtils.valid_sender_number?(options[:sender_number])
+      raise ArgumentError.new("Reply to number must be between 4 to 14 digits: #{options[:sender_number]}") if
+        options[:sender_number].present? && !PhoneNumberUtils.valid_sender_number?(options[:sender_number])
       raise ArgumentError.new("Sender name must be between 2 and 11 latin chars") if options[:sender_name].present? && !PhoneNumberUtils.valid_sender_name?(options[:sender_name])
 
       phones = [phones] unless phones.is_a?(Array)
